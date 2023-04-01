@@ -176,6 +176,9 @@ export_file_path = "./models/export.pkl"
 def Plant_Disease_Detection(_img_file_path):
     model = load_learner(export_file_path, "export.pkl")
     prediction = model.predict(img_file_path)[0]
+    if prediction not in classes:
+        prediction_sentence = f"The uploaded image is {prediction}, which is not compatible with the application. Please upload an image of a plant leaf for disease detection."
+        return prediction_sentence
     prediction_sentence = classes_and_descriptions[prediction]
     return prediction_sentence
 
